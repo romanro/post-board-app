@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { BoardRoutingModule } from './board-routing.module';
 import { BoardComponent } from './board.component';
+import { NoteComponent } from './note/note.component';
 
 @NgModule({
   imports: [
-
-    CommonModule, BoardRoutingModule
+    CommonModule,
+    BoardRoutingModule
   ],
-  declarations: [BoardComponent]
+  declarations: [BoardComponent, NoteComponent]
 })
 export class BoardModule { }

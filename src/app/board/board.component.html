@@ -1,3 +1,23 @@
-<p>
-  board works!
-</p>
+<div class="container-fluid">
+  <div class="row mt-3">
+    <div class="col text-center">
+      <h1 class="h2">
+        Wellcome to Post Board!
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6 col-lg-3">
+      <a class="btn btn-success"
+         (click)="handleNewNoteClick()">NEW NOTE</a>
+    </div>
+
+    <ng-template [ngIf]="notes.length > 0">
+      <div *ngFor="let note of notes"
+           class="col-12 col-md-6 col-lg-3">
+        <pb-note [note]="note"></pb-note>
+      </div>
+    </ng-template>
+
+  </div>
+</div>

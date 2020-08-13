@@ -19,6 +19,12 @@
       ],
       "@ui/*": [
         "src/app/_infra/ui/*"
+      ],
+      "@board/*": [
+        "src/app/board/*"
+      ],
+      "@boardinfra/*": [
+        "src/app/board/_infra/*"
       ]
     }
   },

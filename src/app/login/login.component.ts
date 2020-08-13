@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         if (res.success) {
           // succesfull login
           localStorage.setItem('authToken', res.token);
+          this.router.navigate(['/', 'board']);
 
         } else {
           this.alertService.error(res.message);

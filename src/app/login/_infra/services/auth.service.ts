@@ -16,14 +16,15 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(loginData: ILoginData): Observable<ILoginResponce> {
-    return this.http.get(this.jsonURL)
-      .pipe(map(
+    return this.http.get(this.jsonURL).pipe(
+      map(
         (res: Array<ILoginData>) => {
           const user = res.find(u => u.username === loginData.username);
           return (user && user.password === loginData.password) ?
-            ({ success: true, token: 'looong&very_sequre&token' }) :
+            ({ success: true, token: 'looong_very_sequre_token' }) :
             ({ success: false, message: 'wrong user name or password' });
-        }));
+        })
+    );
   }
 
 }

@@ -26,4 +26,30 @@ export class NotesEffects {
     )
   );
 
+  updateNote$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(NotesActions.BeginUpdateNoteAction),
+      mergeMap(action =>
+        this.notesService.updateNote(action.payload).pipe(
+          map((data: INote) => {
+            return NotesActions.SuccessUpdateNoteAction({ payload: data });
+          })
+        )
+      )
+    )
+  );
+
+  addNote$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(NotesActions.BeginAddNoteAction),
+      mergeMap(action =>
+        this.notesService.addNote(action.payload).pipe(
+          map((data: INote) => {
+            return NotesActions.SuccessAddNoteAction({ payload: data });
+          })
+        )
+      )
+    )
+  );
+
 }

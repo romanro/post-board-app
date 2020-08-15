@@ -1,7 +1,15 @@
 <div class="card note-card">
   <div *ngIf="note"
+       (click)="openNote()"
        class="card-body">
     <h5 class="card-title">{{note.author}}</h5>
     <p class="card-text">{{note.content}}</p>
+  </div>
+
+  <div *ngIf="!note"
+       (click)="addNote()"
+       class="card-body">
+    <h5 class="card-title">Add new note...</h5>
+    <div class="new-note-placeholder">+</div>
   </div>
 </div>

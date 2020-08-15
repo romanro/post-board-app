@@ -1,0 +1,37 @@
+<form [formGroup]="noteForm"
+      (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="author">Author name</label>
+    <input type="text"
+           formControlName="author"
+           class="form-control"
+           [ngClass]="{ 'is-invalid': submitted && f.author.errors }" />
+    <div *ngIf="submitted && f.author.errors"
+         class="invalid-feedback">
+      <div *ngIf="f.author.errors.required">Author name is required
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="content">What wold you like to say?</label>
+    <textarea rows="5"
+              formControlName="content"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.content.errors }"></textarea>
+    <div *ngIf="submitted && f.content.errors"
+         class="invalid-feedback">
+      <div *ngIf="f.content.errors.required">Note content is required
+      </div>
+      <div *ngIf="f.content.errors.maxlength">Note shold be less than 200
+        characters
+      </div>
+    </div>
+  </div>
+  <div class="form-group text-right">
+    <button class="btn btn-sm btn-outline-dark mr-2"
+            (click)="onCancel()">Cancel</button>
+    <button type="submit"
+            [disabled]="loading"
+            class="btn btn-sm btn-outline-success">Save</button>
+  </div>
+</form>

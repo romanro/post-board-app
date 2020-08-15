@@ -1,0 +1,30 @@
+<div class="modal-header">
+  <h5 class="modal-title">{{modalTitle}}</h5>
+</div>
+
+<div class="modal-body"
+     [ngSwitch]="mode">
+
+  <ng-container *ngSwitchCase="'show'">
+    <p>{{note.content}}</p>
+    <div class="text-right">
+      <button type="button"
+              class="btn btn-sm btn-outline-info mr-2"
+              (click)="activeModal.close('Close click')">Close</button>
+      <button type="button"
+              class="btn btn-sm btn-outline-dark"
+              (click)="editNote()">Edit</button>
+    </div>
+  </ng-container>
+
+  <ng-container *ngSwitchDefault>
+    <pb-note-add-edit [note]="note"
+                      [mode]="mode"
+                      (sended)="onNoteSended()"></pb-note-add-edit>
+  </ng-container>
+
+
+</div>
+<div class="modal-footer">
+
+</div>

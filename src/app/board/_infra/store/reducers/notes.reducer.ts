@@ -7,10 +7,21 @@ export const initialNotesState = initializeNotesState();
 
 const reducer = createReducer(
   initialNotesState,
-  on(NotesActions.GetNotesAction, state => state),
 
   on(NotesActions.SuccessGetNotesAction, (state: NotesState, { payload }) => {
     return { ...state, notes: payload };
+  }),
+
+  on(NotesActions.SuccessAddNoteAction, (state: NotesState, { payload }) => {
+    const notes = [...state.notes];
+    notes.push(payload);
+    console.log(notes);
+    return { ...state, notes };
+  }),
+
+  on(NotesActions.SuccessUpdateNoteAction, (state: NotesState, { payload }) => {
+    const notes = state.notes.map(note => note.id === payload.id ? payload : note);
+    return { ...state, notes };
   }),
 
 );

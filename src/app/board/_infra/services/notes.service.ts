@@ -9,11 +9,6 @@ import { UtilsService } from './utils.service';
 })
 export class NotesService {
 
-  mockNotes: Array<INote> = [
-    { id: 'someUNiqueId1', author: 'Demo Autor', content: 'Lotem Ipsum lalalla', date: new Date() },
-    { id: 'someUNiqueId2', author: 'Second Autor', content: 'Lotem Ipsum trololol', date: new Date() }
-  ];
-
   constructor(private utilsService: UtilsService) { }
 
   getNotes(): Observable<INote[]> {

@@ -1,1 +1,9 @@
+@import './styles/bootstrap-variables'; // CUSTOMIZED BOOTSTRAP
 @import '~bootstrap/scss/bootstrap.scss';
+
+
+//mixins
+@import './styles/mixin';
+
+// CUSTOM STYLING
+@import './styles/note-card';

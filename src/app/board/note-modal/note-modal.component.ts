@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as NotesActions from '@app/board/_infra/store/actions/notes.actions';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
 
 import { INote, NoteModalMode } from '../_infra/models';
 
@@ -14,8 +16,7 @@ export class NoteModalComponent implements OnInit {
 
   modalTitle: string;
 
-  constructor(public activeModal: NgbActiveModal) { }
-
+  constructor(public activeModal: NgbActiveModal, private store: Store<any>) { }
 
   ngOnInit(): void {
     this.switchTemplate();
@@ -38,6 +39,11 @@ export class NoteModalComponent implements OnInit {
   editNote(): void {
     this.mode = NoteModalMode.EDIT;
     this.switchTemplate();
+  }
+
+  deleteNote(): void {
+    this.store.dispatch(NotesActions.BeginDeleteNoteAction({ payload: this.note.id }));
+    this.activeModal.close();
   }
 
   onNoteSended(): void {

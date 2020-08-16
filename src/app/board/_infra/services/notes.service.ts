@@ -38,6 +38,12 @@ export class NotesService {
     return of(note);
   }
 
+  deleteNote(noteId: string): Observable<string> {
+    const notes = this.getNotesFromLS().filter(note => note.id !== noteId);
+    this.storeNotesInLS(notes);
+    return of(noteId);
+  }
+
   /// Temporary Local Storage Functions
   private getNotesFromLS(): Array<INote> {
     return JSON.parse(localStorage.getItem(NOTES_KEY)) || [];

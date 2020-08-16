@@ -23,6 +23,11 @@ const reducer = createReducer(
     return { ...state, notes };
   }),
 
+  on(NotesActions.SuccessDeleteNoteAction, (state: NotesState, { payload }) => {
+    const notes = state.notes.filter(note => note.id !== payload);
+    return { ...state, notes };
+  }),
+
 );
 
 

@@ -52,4 +52,17 @@ export class NotesEffects {
     )
   );
 
+  deleteNote$: Observable<Action> = createEffect(() =>
+    this.action$.pipe(
+      ofType(NotesActions.BeginDeleteNoteAction),
+      mergeMap(action =>
+        this.notesService.deleteNote(action.payload).pipe(
+          map((noteId: string) => {
+            return NotesActions.SuccessDeleteNoteAction({ payload: noteId });
+          })
+        )
+      )
+    )
+  );
+
 }

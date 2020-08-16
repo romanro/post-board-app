@@ -8,7 +8,9 @@ export enum NotesActionType {
   BeginAddNoteAction = '[notes] - Begin Add note',
   SuccessAddNoteAction = '[notes] - Success Add note',
   BeginUpdateNoteAction = '[notes] - Begin Update note',
-  SuccessUpdateNoteAction = '[notes] - Success Update note'
+  SuccessUpdateNoteAction = '[notes] - Success Update note',
+  BeginDeleteNoteAction = '[notes] - Begin Delete note',
+  SuccessDeleteNoteAction = '[notes] - Success Delete note'
 }
 
 
@@ -28,6 +30,7 @@ export const SuccessAddNoteAction = createAction(
   NotesActionType.SuccessAddNoteAction,
   props<{ payload: INote }>()
 );
+
 export const BeginUpdateNoteAction = createAction(
   NotesActionType.BeginUpdateNoteAction,
   props<{ payload: INote }>()
@@ -36,4 +39,14 @@ export const BeginUpdateNoteAction = createAction(
 export const SuccessUpdateNoteAction = createAction(
   NotesActionType.SuccessUpdateNoteAction,
   props<{ payload: INote }>()
+);
+
+export const BeginDeleteNoteAction = createAction(
+  NotesActionType.BeginUpdateNoteAction,
+  props<{ payload: string }>()
+);
+
+export const SuccessDeleteNoteAction = createAction(
+  NotesActionType.SuccessUpdateNoteAction,
+  props<{ payload: string }>()
 );

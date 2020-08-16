@@ -15,7 +15,6 @@ const reducer = createReducer(
   on(NotesActions.SuccessAddNoteAction, (state: NotesState, { payload }) => {
     const notes = [...state.notes];
     notes.push(payload);
-    console.log(notes);
     return { ...state, notes };
   }),
 

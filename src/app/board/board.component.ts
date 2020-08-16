@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { INote, SortingCriteria } from '@app/board/_infra/models';
+import { UtilsService } from '@app/board/_infra/services';
 import * as NotesActions from '@app/board/_infra/store/actions/notes.actions';
+import * as selectors from '@app/board/_infra/store/selectors';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-
-import { INote } from './_infra/models';
-import * as selectors from './_infra/store/selectors';
 
 @Component({
   selector: 'pb-board',
@@ -16,7 +16,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   subs: Array<Subscription> = [];
 
-  constructor(private store: Store<any>) { }
+  constructor(private store: Store<any>, private utilsService: UtilsService) { }
 
   ngOnInit(): void {
 
@@ -24,7 +24,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.store.select(selectors.selectAllNotes()).subscribe(
         res => {
           if (res) {
-            this.notes = [...res];
+            this.notes = this.utilsService.sortNotes(res, SortingCriteria.DATE);
           } else {
             this.store.dispatch(NotesActions.BeginGetNotesAction());
           }
@@ -34,7 +34,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     )
   }
 
-  handleNewNoteClick(): void { }
 
   ngOnDestroy(): void {
     this.subs.forEach(s => s.unsubscribe());

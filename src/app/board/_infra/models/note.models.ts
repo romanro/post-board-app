@@ -10,3 +10,5 @@ export enum NoteModalMode {
   SHOW = 'show',
   ADD = 'add'
 }
+
+export const NOTES_KEY = 'notes';

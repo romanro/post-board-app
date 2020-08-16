@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { INote } from './../models/note.models';
+import { INote, NOTES_KEY } from './../models/note.models';
 import { UtilsService } from './utils.service';
 
 @Injectable({
@@ -17,19 +17,34 @@ export class NotesService {
   constructor(private utilsService: UtilsService) { }
 
   getNotes(): Observable<INote[]> {
-    return of(this.mockNotes);
+    const notes = this.getNotesFromLS();
+    return of(notes);
   }
 
   addNote(note: INote): Observable<INote> {
     const updatedNote: INote = { ...note };
     updatedNote.id = this.utilsService.generateUID();
     updatedNote.date = new Date();
+
+    const notes = this.getNotesFromLS();
+    notes.push(updatedNote);
+    this.storeNotesInLS(notes);
     return of(updatedNote);
   }
 
   updateNote(note: INote): Observable<INote> {
-    this.mockNotes = this.mockNotes.map(n => n.id === note.id ? note : n);
+    const notes = this.getNotesFromLS().map(n => n.id === note.id ? note : n);
+    this.storeNotesInLS(notes);
     return of(note);
+  }
+
+  /// Temporary Local Storage Functions
+  private getNotesFromLS(): Array<INote> {
+    return JSON.parse(localStorage.getItem(NOTES_KEY)) || [];
+  }
+
+  private storeNotesInLS(notes: Array<INote> = []): void {
+    localStorage.setItem(NOTES_KEY, JSON.stringify(notes));
   }
 
 

@@ -21,7 +21,7 @@ export class AuthService {
         (res: Array<ILoginData>) => {
           const user = res.find(u => u.username === loginData.username);
           return (user && user.password === loginData.password) ?
-            ({ success: true, token: 'looong_very_sequre_token' }) :
+            ({ success: true, token: 'looong_very_secure_token' }) :
             ({ success: false, message: 'wrong user name or password' });
         })
     );
